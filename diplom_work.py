@@ -95,4 +95,5 @@ class User():
 user = User(TOKEN, user_id)
 user.get_user_group()
 user.get_user_friends()
-#user.get_friends_groups()
+user.get_friends_groups(user_friends_id, user_group_id)
+user.write_file(sort_friends_group_id)
