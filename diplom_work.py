@@ -60,7 +60,7 @@ class User():
             )
             print("Status code:", response_id.status_code)
             r = response_id.json()
-            for key in r.items():
+            for key in r:
                 if key == 'response':
                     for i in user_group_id:
                         if i in r['response']['items']:
@@ -89,11 +89,12 @@ class User():
             print("Status code:", response_group.status_code)
             g = response_group.json()['response']
 
-            with open('Groups.json', 'a') as f:
+            with open('Groups.json', 'a', encoding='utf-8') as f:
                 f.write(f'{str(g)}, +\n')
 
-user = User(TOKEN, user_id)
-user.get_user_group()
-user.get_user_friends()
-user.get_friends_groups(user_friends_id, user_group_id)
-user.write_file(sort_friends_group_id)
+if __name__ == '__main__':
+    user = User(TOKEN, user_id)
+    user_group_id = user.get_user_group()
+    user_friends_id = user.get_user_friends()
+    sort_friends_group_id = user.get_friends_groups(user_friends_id, user_group_id)
+    user.write_file(sort_friends_group_id)
