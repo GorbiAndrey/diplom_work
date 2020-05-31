@@ -1,5 +1,6 @@
 import requests
 import time
+import json
 
 
 TOKEN = '958eb5d439726565e9333aa30e50e0f937ee432e927f0dbd541c541887d919a7c56f95c04217915c32008'
@@ -68,7 +69,7 @@ class User():
                     print(f'{friends_id} добавлен в список')
                 else:
                     print(f'{friends_id} исключен из списка')
-            time.sleep(0.2)
+            time.sleep(0.4)
         sort_friends_group_id = set(friends_group_id)
 
         return sort_friends_group_id
@@ -90,7 +91,7 @@ class User():
             g = response_group.json()['response']
 
             with open('Groups.json', 'a', encoding='utf-8') as f:
-                f.write(f'{str(g)}, +\n')
+                json.dump(g, f, sort_keys=False, indent=4, ensure_ascii=False, separators=(',', ': '))
 
 if __name__ == '__main__':
     user = User(TOKEN, user_id)
